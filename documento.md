@@ -106,7 +106,7 @@ if os.path.exists(nome_arquivo):
 
 **Saída Esperada do Código:**
 
-![Problema original](./imgs/problema_original.png)
+<img src="./imgs/problema_original.png" alt="[Problema original" style="display: block; margin: auto;" />
 
 **Análise da Saída Incorreta:**
 A saída `['\ufeffmüsli', 'pöök', 'rääk']` demonstra claramente a falha. O primeiro token, "müsli", está prefixado com o caractere BOM `\ufeff`. Isso ocorre porque a leitura padrão do arquivo com `encoding='utf-8'` não lidou com o BOM introduzido pela escrita com `encoding='utf-8-sig'`.
@@ -153,7 +153,7 @@ if os.path.exists(nome_arquivo):
 
 **Saída Esperada do Código Corrigido:**
 
-![Solução do Problema](./imgs/solucao_problema.png)
+<img src="./imgs/solucao_problema.png" alt="[Solução do Problema" style="display: block; margin: auto;" />
 
 **Análise da Saída Correta:**
 A saída agora é `['müsli', 'pöök', 'rääk']`. O primeiro token está correto, sem o prefixo BOM. Isso demonstra que ler o arquivo utilizando `codecs.open(..., encoding='utf-8-sig')` resolve o problema de forma limpa e eficiente, fornecendo ao tokenizador um texto limpo.
@@ -193,7 +193,7 @@ Aqui iremos apresentar algumas duas respostas ao problema original que não fora
 
 Uma das respostas dada, traduzindo, foi: “Você deve certificar-se de que está passando strings Unicode para os tokenizadores nltk. Recebo as seguintes tokenizações idênticas da sua string com ambos os tokenizadores:”
 
-![Solução Não Aceita](./imgs/solucao_errada_1.jpg)
+<img src="./imgs/solucao_errada_1.jpg" alt="[Solução Não Aceita" style="display: block; margin: auto;" />
 
 Apesar de reforçar a importância de usar strings Unicode, o que é verdade, especialmente em **Python 2.x** (contexto provável, já que o código original usa `.decode('utf8')`) e mostrar que os tokenizadores funcionam corretamente em strings Unicode — o que, em uma situação normal, ajuda a reduzir dúvidas sobre os tokenizadores em si, ela não foca no contexto do problema real do usuário, que é ler o conteúdo de um arquivo que contém BOM (`\ufeff`), e não simplesmente lidar com uma string literal em **Python**.
 
@@ -202,7 +202,7 @@ Apesar de reforçar a importância de usar strings Unicode, o que é verdade, es
 
 Outra resposta proposta, traduzindo, foi: “O código UFEE é um caractere "*ZERO WIDTH NO-BREAK SPACE*" e este não é considerado um espaço pelo módulo `re`, portanto, o `PunktWordTokenizer()`, que usa a expressão regular `r'\w+|[^\w\s]+'` com sinalizadores Unicode e Dotall, reconhece este caractere como uma palavra. Se não quiser remover o caractere manualmente, você pode usar o seguinte tokenizador:”
 
-![Solução Não Aceita](./imgs/solucao_errada_2.jpg)
+<img src="./imgs/solucao_errada_2.jpg" alt="[Solução Não Aceita" style="display: block; margin: auto;" />
 
 Alguns pontos incorretos podem ser tirados dessa resposta:
 
